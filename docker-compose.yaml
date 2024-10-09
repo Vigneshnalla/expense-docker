@@ -1,21 +1,35 @@
+version: '3.8'  # Specify the version of Docker Compose
+
 name: expense
 networks:
-  default:
-    name: expense
+  expense:  # Custom network for isolation
+    driver: bridge  # Default network driver
+
 services:
   mysql:
     image: mysql:v1.0
     container_name: mysql
+    environment:  # Optional environment variables for MySQL
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: expensedb
+    networks:
+      - expense  # Connect to the expense network
+
   backend:
     image: backend:v1.0
     container_name: backend
     command: sh -c "sleep 20 && node /opt/server/index.js"
     depends_on:
-    - mysql
+      - mysql
+    networks:
+      - expense  # Connect to the expense network
+
   frontend:
     image: frontend:v1.0
     container_name: frontend
     depends_on:
       - backend
-    expose:
-      - "80:80"
+    ports:
+      - "80:80"  # Map host port 80 to container port 80
+    networks:
+      - expense  # Connect to the expense network
