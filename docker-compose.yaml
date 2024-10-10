@@ -14,6 +14,8 @@ services:
       MYSQL_DATABASE: expensedb
     networks:
       - expense  # Connect to the expense network
+    volumes:
+      - mysql
 
   backend:
     image: backend:v1.0
