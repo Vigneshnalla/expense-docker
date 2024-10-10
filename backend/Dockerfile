@@ -5,8 +5,6 @@ RUN addgroup -S expense && adduser -S expense -G expense\
  && rm -rf /opt/server \
  && mkdir /opt/server \
  && chown expense:expense -R /opt/server
-RUN mkdir /opt/server
-RUN chown expense:expense -R /opt/server
 WORKDIR /opt/server
 COPY package.json .
 COPY *.js .
