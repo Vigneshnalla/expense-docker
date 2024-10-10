@@ -1,10 +1,10 @@
-version: '3.8'  # Specify the version of Docker Compose
-
+version: '3.8'  
 name: expense
 networks:
   expense:  # Custom network for isolation
     driver: bridge  # Default network driver
-
+volumes:
+  mysql:
 services:
   mysql:
     image: mysql:v1.0
