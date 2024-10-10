@@ -7,7 +7,7 @@ volumes:
   mysql:
 services:
   mysql:
-    image: mysql:v1.0
+    image: vigneshramnalla/mysql:v1.0
     container_name: mysql
     environment:  # Optional environment variables for MySQL
       MYSQL_ROOT_PASSWORD: rootpassword
@@ -18,7 +18,7 @@ services:
       - mysql:/var/lib/mysql
 
   backend:
-    image: backend:v1.0
+    image: vigneshramnalla/backend:v1.0
     container_name: backend
     command: sh -c "sleep 20 && node /opt/server/index.js"
     depends_on:
@@ -27,7 +27,7 @@ services:
       - expense  # Connect to the expense network
 
   frontend:
-    image: frontend:v1.0
+    image: vigneshramnalla/frontend:v1.0
     container_name: frontend
     depends_on:
       - backend
